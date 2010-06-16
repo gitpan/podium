@@ -1,0 +1,104 @@
+#!/usr/bin/perl -w
+
+use 5.10.0;
+
+use strict;
+use warnings;
+
+use Carp::Always;
+use App::Podium;
+
+MAIN: {
+    my $config = App::Podium::get_config();
+
+    my @commands = @ARGV;
+
+    for my $command ( @commands ) {
+        given ( $command ) {
+            when ('build') { App::Podium::command_build( $config ) }
+            when ('clean') { App::Podium::command_clean( $config ) }
+            default { say qq{Unknown command "$command"} }
+        }
+    }
+}
+
+=head1 NAME
+
+podium - a POD-based presentation and website builder
+
+=head1 SYNOPSIS
+
+    podium --config=config.yaml clean
+    podium --config=config.yaml build
+
+=head1 DESCRIPTION
+
+Perl's POD format is great for building code-heavy presentations.
+So this takes the POD and builds presentations with it.
+
+=head1 TODO
+
+There's a lot to do.  I'm just putting this up to have something
+up.
+
+=over 4
+
+=item * Add --help
+
+=item * Add "test" action
+
+=item * Allow it to run without templates.
+
+=item * Let it copy over static stuff.
+
+=back
+
+=head1 AUTHOR
+
+Andy Lester, C<< <andy at petdance.com> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to the issues list at
+Github: L<http://github.com/petdance/podium/issues>.  I will be notified,
+and then you'll automatically be notified of progress on your bug
+as I make changes.
+
+=head1 SUPPORT
+
+=over 4
+
+=item * Bugs
+
+L<http://github.com/petdance/podium/issues>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/podium>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/podium>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/podium/>
+
+=back
+
+=head1 ACKNOWLEDGEMENTS
+
+I would love to populate this section.  Please send me your contributions.
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright (C) 2010, Andy Lester,
+
+This module is free software.  You can redistribute it and/or modify
+it under the terms of the Artistic License 2.0.
+
+This program is distributed in the hope that it will be useful, but
+without any warranty; without even the implied warranty of
+merchantability or fitness for a particular purpose.
+
+=cut
